@@ -2,6 +2,7 @@ package com.todo.controller;
 
 
 import com.sun.net.httpserver.Authenticator;
+import com.todo.dao.ToDoDao;
 import com.todo.entities.Todo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -19,11 +20,15 @@ public class ToDoController {
 
     @Autowired
     ServletContext context;
+
+    @Autowired
+    ToDoDao toDoDao;
+
     @RequestMapping("/home")
     public  String home(Model m){
         String attr="home";
         m.addAttribute("page",attr);
-        List<Todo> list= (List<Todo>) context.getAttribute("list");
+        List<Todo> list= this.toDoDao.getAll();
         m.addAttribute("todos",list);
 
         return "home";
@@ -40,8 +45,7 @@ public class ToDoController {
     public String SaveToDo(@ModelAttribute("AddTodo") Todo t, Model m){
         System.out.println(t);
         t.setDate(new Date());
-        List<Todo> list= (List<Todo>) context.getAttribute("list");
-        list.add(t);
+      this.toDoDao.save(t);
         m.addAttribute("msg", "Sucessfully Added");
         return "home";
     }

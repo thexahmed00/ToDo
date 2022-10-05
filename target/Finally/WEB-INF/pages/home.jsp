@@ -19,14 +19,17 @@
 <body>
 
 <div class="jumbotron jumbotron-fluid">
-    <div class="container">
-        <h1 class="display-4">Welcome!</h1>
-        <p class="lead">Complete Task Management Tool.</p>
+    <div class="container text-center">
+
+            <h1 class="display-4">Welcome!</h1>
+            <p class="lead">Complete Task Management Tool.</p>
+
+
     </div>
 </div>
 
 <div class="container-fluid " >
-    <h1 class="text-center  text-dark display-4 ">Plan Your Day</h1>
+    <h1 class="text-center text-dark display-4 ">Plan Your Day</h1>
 
     <c:if test="${not empty msg}">
         <div class="alert alert-success">

@@ -6,9 +6,8 @@ import com.todo.dao.ToDoDao;
 import com.todo.entities.Todo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.ServletContext;
 import java.util.ArrayList;
@@ -47,6 +46,15 @@ public class ToDoController {
         t.setDate(new Date());
       this.toDoDao.save(t);
         m.addAttribute("msg", "Sucessfully Added");
+        return "home";
+    }
+
+    @RequestMapping("/deleteTask/{toID}")
+    public String DeleteTodo(@PathVariable("toID") int toID, Model m){
+
+        System.out.println("deleting...");
+        this.toDoDao.delete(toID);
+        m.addAttribute("msg","Succesfully deleted");
         return "home";
     }
 }
